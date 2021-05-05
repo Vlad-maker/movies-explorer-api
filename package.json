@@ -1,0 +1,21 @@
+{
+  "name": "movies-api",
+  "version": "1.0.0",
+  "description": "movies-explorer-backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "lint": "npx eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vlad-maker/movies-explorer-api.git"
+  },
+  "author": "Vlad-maker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vlad-maker/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/Vlad-maker/movies-explorer-api#readme"
+}
