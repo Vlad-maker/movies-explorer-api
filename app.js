@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const { errors } = require('celebrate');
 
 const app = express();
 
@@ -13,5 +15,5 @@ mongoose.connect('mongodb://localhost:27017/moviesexplorerdb', {
 
 
 app.listen(PORT, () => {
-  console.log(`Сервер запущен напорту ${PORT}`)
+  console.log(`Сервер запущен на порту ${PORT}`)
 })
