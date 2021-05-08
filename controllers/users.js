@@ -13,11 +13,11 @@ module.exports.login = (req, res, next) => {
     .select('+password')
     .then((user) => {
       if (!user) {
-        throw new UnauthorizedError('Неправильные почта или пароль'); // 401
+        throw new UnauthorizedError('Неправильные почта или пароль');
       }
       return bcrypt.compare(password, user.password).then((matched) => {
         if (!matched) {
-          throw new UnauthorizedError('Неправильные почта или пароль'); // 401
+          throw new UnauthorizedError('Неправильные почта или пароль');
         }
         const token = jwt.sign(
         { _id: user._id },
@@ -35,7 +35,7 @@ module.exports.createProfile = (req, res, next) => {
   User.findOne({ email })
     .then((data) => {
       if (data && data.email === email) {
-        throw new ConflictError('Пользователь с таким Email уже существует'); // 409
+        throw new ConflictError('Пользователь с таким Email уже существует');
       }
       bcrypt
         .hash(password, 10)
@@ -60,7 +60,7 @@ module.exports.getMyProfile = (req, res, next) => {
   User.findById(currentUserId)
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Такого пользователя не существует'); // 404
+        throw new NotFoundError('Такого пользователя не существует');
       }
       return res.send(user);
     })
@@ -73,7 +73,7 @@ module.exports.updateProfile = (req, res, next) => {
   User.findOne({ email })
     .then((data) => {
       if (data && data.email === email) {
-        throw new ConflictError('Пользователь с таким Email уже существует'); // 409
+        throw new ConflictError('Пользователь с таким Email уже существует');
       }
       User.findByIdAndUpdate({ _id: userId }, { email, name }, { new: true })
       .then((user) => res.send(user))
