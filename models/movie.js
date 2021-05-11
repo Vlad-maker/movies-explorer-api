@@ -1,0 +1,86 @@
+const mongoose = require('mongoose');
+const { ObjectId } = require('mongodb');
+const movieValidator = require('validator');
+
+const movieSchema = new mongoose.Schema({
+  country: {
+    type: String,
+    required: true,
+  },
+  director: {
+    type: String,
+    required: true,
+  },
+  duration: {
+    type: Number,
+    required: true,
+  },
+  year: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: String,
+    required: true,
+    validate: {
+      validator(v) {
+        return movieValidator.isURL(v);
+      },
+      message: 'Возникла ошибка при валидации URL',
+    },
+  },
+  trailer: {
+    type: String,
+    required: true,
+    validate: {
+      validator(v) {
+        return movieValidator.isURL(v);
+      },
+      message: 'Возникла ошибка при валидации URL',
+    },
+  },
+  thumbnail: {
+    type: String,
+    required: true,
+    validate: {
+      validator(v) {
+        return movieValidator.isURL(v);
+      },
+      message: 'Возникла ошибка при валидации URL',
+    },
+  },
+  owner: {
+    type: ObjectId,
+    required: true,
+    validate: {
+      validator(v) {
+        return ObjectId.isValid(v);
+      },
+      message: 'Некорректный id пользователя',
+    },
+  },
+  movieId: {
+    type: Number,
+    required: true,
+    validate: {
+      validator(v) {
+        return ObjectId.isValid(v);
+      },
+      message: 'Некорректный id фильма',
+    },
+  },
+  nameRU: {
+    type: String,
+    required: true,
+  },
+  nameEN: {
+    type: String,
+    required: true,
+  },
+});
+
+module.exports = mongoose.model('movie', movieSchema);
