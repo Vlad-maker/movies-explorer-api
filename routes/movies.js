@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const validator = require('validator');
 const { celebrate, Joi } = require('celebrate');
+const { ObjectId } = require('mongoose').Types;
 const { getMovie, deleteMovie, createMovie } = require('../controllers/movies');
 
 router.get(
@@ -62,19 +63,25 @@ router.post(
 );
 
 router.delete(
-  '/movies/:movieId',
-    celebrate({
-      headers: Joi.object()
+  "/movies/:movieId",
+  celebrate({
+    headers: Joi.object()
       .keys({
-      authorization: Joi.string().required(),
+        authorization: Joi.string().required(),
       })
-    .unknown(),
+      .unknown(),
     params: Joi.object().keys({
-      movieId: Joi.string().alphanum().length(24).required()
-      .hex(),
+      movieId: Joi.string()
+        .required()
+        .custom((value) => {
+          if (!ObjectId.isValid(value)) {
+            throw new Error("Ошибка валидации. Передан некорректный ID");
+          }
+          return value;
+        }),
     }),
   }),
-  deleteMovie,
+  deleteMovie
 );
 
 module.exports = router;
