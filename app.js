@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -7,6 +8,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { BD_DEV_HOST } = require('./utils/config');
 const { centralErrors } = require('./utils/centralErrors');
 const { authoriz } = require('./middlewares/auth');
+const cors = require('cors');
 const signinUser = require('./routes/signin');
 const signupUser = require('./routes/signup');
 const userRouter = require('./routes/users');
@@ -14,9 +16,18 @@ const moviesRouter = require('./routes/movies');
 const NotFoundError = require('./errors/NotFound_Error_404');
 
 const app = express();
+const { PORT = 3000, LINK, NODE_ENV } = process.env;
+
+const corsOptions = {
+  origin: ['*'],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+};
+app.use('*', cors(corsOptions));
 app.use(helmet());
 
-const { PORT = 3000, LINK, NODE_ENV } = process.env;
 mongoose.connect(NODE_ENV === 'production' ? LINK : BD_DEV_HOST, {
   useNewUrlParser: true,
   useCreateIndex: true,
