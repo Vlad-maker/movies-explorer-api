@@ -1,30 +1,35 @@
-const router = require('express').Router();
-const validator = require('validator');
-const { celebrate, Joi } = require('celebrate');
+const router = require("express").Router();
+const { celebrate, Joi } = require("celebrate");
+const validator = require("validator");
 const { ObjectId } = require('mongoose').Types;
-const { getMovie, deleteMovie, createMovie } = require('../controllers/movies');
+
+const {
+  getMovies,
+  deleteMovies,
+  createMovies,
+} = require("../controllers/movies");
 
 router.get(
-  '/movies',
-    celebrate({
-      headers: Joi.object()
+  "/movies",
+  celebrate({
+    headers: Joi.object()
       .keys({
-      authorization: Joi.string().required(),
-    })
-    .unknown(),
-    }),
-  getMovie,
+        authorization: Joi.string().required(),
+      })
+      .unknown(),
+  }),
+  getMovies
 );
 
 router.post(
-  '/movies',
-    celebrate({
-      headers: Joi.object()
+  "/movies",
+  celebrate({
+    headers: Joi.object()
       .keys({
-      authorization: Joi.string().required(),
+        authorization: Joi.string().required(),
       })
       .unknown(),
-      body: Joi.object().keys({
+    body: Joi.object().keys({
       country: Joi.string().required(),
       director: Joi.string().required(),
       duration: Joi.number().required(),
@@ -36,7 +41,7 @@ router.post(
           if (validator.isURL(value)) {
             return value;
           }
-          return helpers.message('Поле "изображение" заполнено некорректно');
+          return helpers.message("Поле image заполнено некорректно");
         }),
       trailer: Joi.string()
         .required()
@@ -44,7 +49,7 @@ router.post(
           if (validator.isURL(value)) {
             return value;
           }
-          return helpers.message('Поле "трейлер" заполнено некорректно');
+          return helpers.message("Поле trailer заполнено некорректно");
         }),
       thumbnail: Joi.string()
         .required()
@@ -52,14 +57,14 @@ router.post(
           if (validator.isURL(value)) {
             return value;
           }
-          return helpers.message('Поле "миниатюра" заполнено некорректно');
+          return helpers.message("Поле thumbnail заполнено некорректно");
         }),
       movieId: Joi.number().required(),
       nameRU: Joi.string().required(),
       nameEN: Joi.string().required(),
     }),
   }),
-  createMovie,
+  createMovies
 );
 
 router.delete(
@@ -75,13 +80,13 @@ router.delete(
         .required()
         .custom((value) => {
           if (!ObjectId.isValid(value)) {
-            throw new Error("Ошибка валидации. Передан некорректный ID");
+            throw new Error("Ошибка валидации. Передан неправильный Id");
           }
           return value;
         }),
     }),
   }),
-  deleteMovie
+  deleteMovies
 );
 
 module.exports = router;

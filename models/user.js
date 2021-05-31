@@ -4,29 +4,30 @@ const userValidator = require('validator');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    minlength: [2, 'Введите не менее 2 символов'],
-    maxlength: [30, 'Введите не более 30 символов'],
     required: true,
+    minlength: 2,
+    maxlength: 30,
   },
   email: {
+    required: true,
     type: String,
     unique: true,
-    required: true,
     validate: {
       validator(v) {
         return userValidator.isEmail(v);
       },
-      message: 'Введен некорректный email',
+      message: 'Email некорректен',
     },
   },
   password: {
-    type: String,
-    minlength: [8, 'Введите не менее 8 символов'],
-    select: false,
     required: true,
+    type: String,
+    minlength: 8,
+    select: false,
   },
 });
 
+// в схеме select: false не срабатывает, поэтому модифицируем объект ответа
 userSchema.methods.toJSON = function findUser() {
   const obj = this.toObject();
   delete obj.password;
