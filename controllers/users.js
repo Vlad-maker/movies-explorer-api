@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const User = require('../models/user');
 const NotFoundError = require('../errors/NotFound_Error_404');
 const ConflictError = require('../errors/Conflict_Error_409');
