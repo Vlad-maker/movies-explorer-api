@@ -5,7 +5,7 @@ const { ObjectId } = require('mongoose').Types;
 
 const {
   getMovies,
-  deleteMovies,
+  deleteMovie,
   createMovies,
 } = require("../controllers/movies");
 
@@ -41,7 +41,7 @@ router.post(
           if (validator.isURL(value)) {
             return value;
           }
-          return helpers.message("Поле image заполнено некорректно");
+          return helpers.message('Поле "изображение" заполнено некорректно');
         }),
       trailer: Joi.string()
         .required()
@@ -49,7 +49,7 @@ router.post(
           if (validator.isURL(value)) {
             return value;
           }
-          return helpers.message("Поле trailer заполнено некорректно");
+          return helpers.message('Поле "трейлер" заполнено некорректно');
         }),
       thumbnail: Joi.string()
         .required()
@@ -57,7 +57,7 @@ router.post(
           if (validator.isURL(value)) {
             return value;
           }
-          return helpers.message("Поле thumbnail заполнено некорректно");
+          return helpers.message('Поле "миниатюра" заполнено некорректно');
         }),
       movieId: Joi.number().required(),
       nameRU: Joi.string().required(),
@@ -86,7 +86,7 @@ router.delete(
         }),
     }),
   }),
-  deleteMovies
+  deleteMovie
 );
 
 module.exports = router;

@@ -30,7 +30,7 @@ const movieSchema = new mongoose.Schema({
       validator(v) {
         return validatorUrl.isURL(v);
       },
-      message: 'Ошибка валидации URL',
+      message: 'Возникла ошибка при валидации URL',
     },
   },
   trailer: {
@@ -40,7 +40,7 @@ const movieSchema = new mongoose.Schema({
       validator(v) {
         return validatorUrl.isURL(v);
       },
-      message: 'Ошибка валидации URL',
+      message: 'Возникла ошибка при валидации URL',
     },
   },
   thumbnail: {
@@ -50,7 +50,7 @@ const movieSchema = new mongoose.Schema({
       validator(v) {
         return validatorUrl.isURL(v);
       },
-      message: 'Ошибка валидации URL',
+      message: 'Возникла ошибка при валидации URL',
     },
   },
   owner: {
@@ -60,7 +60,7 @@ const movieSchema = new mongoose.Schema({
       validator(v) {
         return ObjectId.isValid(v);
       },
-      message: 'Некорректный id',
+      message: 'Некорректный id пользователя',
     },
   },
   movieId: {

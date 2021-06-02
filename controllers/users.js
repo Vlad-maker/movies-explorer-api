@@ -57,12 +57,12 @@ module.exports.createProfile = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.getUsersMe = (req, res, next) => {
+module.exports.getProfileInfo = (req, res, next) => {
   const currentUserId = mongoose.Types.ObjectId(req.user._id);
   User.findById(currentUserId)
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Такого пользователя не существует'); // 404
+        throw new NotFoundError('Пользователя не существует'); // 404
       }
       return res.send(user);
     })
@@ -76,7 +76,7 @@ module.exports.updateProfile = (req, res, next) => {
   User.findOne({ email })
     .then((data) => {
       if (data && data.email === email) {
-        throw new ConflictError('Пользователь с таким Email уже существует'); // 409
+        throw new ConflictError('Пользователь с таким Email существует'); // 409
       }
       User.findByIdAndUpdate({ _id: userId }, { email, name }, { new: true })
         .then((user) => res.send(user))

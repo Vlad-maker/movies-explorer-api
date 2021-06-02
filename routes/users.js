@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const validator = require('validator');
-const { getUsersMe, updateProfile } = require('../controllers/users');
+const { getProfileInfo, updateProfile } = require('../controllers/users');
 
 router.get(
   '/users/me',
@@ -12,7 +12,7 @@ router.get(
       })
       .unknown(),
   }),
-  getUsersMe,
+  getProfileInfo,
 );
 router.patch(
   '/users/me',
