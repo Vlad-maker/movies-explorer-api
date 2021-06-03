@@ -19,6 +19,10 @@ const app = express();
 
 const { PORT = 3000, LINK, NODE_ENV } = process.env;
 
+app.use((req,res, next) => {
+  console.log(req)
+  next()
+})
 // const corsOptions = {
 //   origin: ['*'],
 //   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
