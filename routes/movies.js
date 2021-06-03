@@ -1,3 +1,4 @@
+
 const router = require("express").Router();
 const { celebrate, Joi } = require("celebrate");
 const validator = require("validator");
@@ -8,6 +9,7 @@ const {
   deleteMovie,
   createMovies,
 } = require("../controllers/movies");
+
 
 router.get(
   "/movies",
@@ -75,6 +77,7 @@ router.delete(
         authorization: Joi.string().required(),
       })
       .unknown(),
+
     params: Joi.object().keys({
       movieId: Joi.string()
         .required()
@@ -88,5 +91,6 @@ router.delete(
   }),
   deleteMovie
 );
+
 
 module.exports = router;
