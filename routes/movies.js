@@ -1,30 +1,37 @@
-const router = require('express').Router();
-const validator = require('validator');
-const { celebrate, Joi } = require('celebrate');
+
+const router = require("express").Router();
+const { celebrate, Joi } = require("celebrate");
+const validator = require("validator");
 const { ObjectId } = require('mongoose').Types;
-const { getMovie, deleteMovie, createMovie } = require('../controllers/movies');
+
+const {
+  getMovies,
+  deleteMovie,
+  createMovies,
+} = require("../controllers/movies");
+
 
 router.get(
-  '/movies',
-    celebrate({
-      headers: Joi.object()
+  "/movies",
+  celebrate({
+    headers: Joi.object()
       .keys({
-      authorization: Joi.string().required(),
-    })
-    .unknown(),
-    }),
-  getMovie,
+        authorization: Joi.string().required(),
+      })
+      .unknown(),
+  }),
+  getMovies
 );
 
 router.post(
-  '/movies',
-    celebrate({
-      headers: Joi.object()
+  "/movies",
+  celebrate({
+    headers: Joi.object()
       .keys({
-      authorization: Joi.string().required(),
+        authorization: Joi.string().required(),
       })
       .unknown(),
-      body: Joi.object().keys({
+    body: Joi.object().keys({
       country: Joi.string().required(),
       director: Joi.string().required(),
       duration: Joi.number().required(),
@@ -59,29 +66,31 @@ router.post(
       nameEN: Joi.string().required(),
     }),
   }),
-  createMovie,
+  createMovies
 );
 
 router.delete(
-  '/movies/:movieId',
-    celebrate({
-      headers: Joi.object()
+  "/movies/:movieId",
+  celebrate({
+    headers: Joi.object()
       .keys({
-      authorization: Joi.string().required(),
+        authorization: Joi.string().required(),
       })
       .unknown(),
-      params: Joi.object().keys({
-        movieId: Joi.string()
-          .required()
-          .custom((value) => {
-            if (!ObjectId.isValid(value)) {
-              throw new Error("Ошибка валидации. Передан неправильный Id");
-            }
-            return value;
-          }),
-      }),
+
+    params: Joi.object().keys({
+      movieId: Joi.string()
+        .required()
+        .custom((value) => {
+          if (!ObjectId.isValid(value)) {
+            throw new Error("Ошибка валидации. Передан неправильный Id");
+          }
+          return value;
+        }),
     }),
-    deleteMovie
-  );
+  }),
+  deleteMovie
+);
+
 
 module.exports = router;

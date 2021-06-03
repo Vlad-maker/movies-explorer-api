@@ -1,12 +1,12 @@
 {
-  "name": "movies-api",
+  "name": "movies-explorer-api",
   "version": "1.0.0",
   "description": "movies-explorer-backend",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app.js",
-    "lint": "npx eslint"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -23,19 +23,24 @@
     "body-parser": "^1.19.0",
     "celebrate": "^14.0.0",
     "cors": "^2.8.5",
-    "dotenv": "^9.0.0",
+
+    "dotenv": "^8.2.0",
+
     "express": "^4.17.1",
     "express-winston": "^4.1.0",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.6",
-    "mongoose": "^5.12.7",
-    "prettier": "^2.3.0",
-    "validator": "^13.6.0",
+
+    "mongoose": "^5.12.4",
+    "npm-git-install": "^0.3.0",
+    "prettier": "^2.2.1",
+    "validator": "^13.5.2",
+
     "winston": "^3.3.3"
   },
   "devDependencies": {
-    "eslint": "^7.26.0",
+    "eslint": "^7.24.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "nodemon": "^2.0.7"
