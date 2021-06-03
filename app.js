@@ -19,13 +19,13 @@ const app = express();
 
 const { PORT = 3000, LINK, NODE_ENV } = process.env;
 
-const corsOptions = {
-  origin: ['*'],
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-};
-app.use('*', cors(corsOptions));
+// const corsOptions = {
+//   origin: ['*'],
+//   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+//   preflightContinue: false,
+//   optionsSuccessStatus: 204,
+// };
+app.use(cors());
 // app.use(helmet());
 
 mongoose.connect(NODE_ENV === 'production' ? LINK : BD_DEV_HOST, {
