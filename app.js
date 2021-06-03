@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
-const helmet = require('helmet');
+// const helmet = require('helmet');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { BD_DEV_HOST } = require('./utils/config');
 const cors = require('cors')
@@ -27,7 +27,7 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
 };
 app.use('*', cors(corsOptions));
-app.use(helmet());
+// app.use(helmet());
 
 mongoose.connect(NODE_ENV === 'production' ? LINK : BD_DEV_HOST, {
   useNewUrlParser: true,
