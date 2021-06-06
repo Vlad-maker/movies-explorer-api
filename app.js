@@ -10,6 +10,7 @@ const cors = require('cors')
 const userRouter = require('./routes/users');
 const moviesRouter = require('./routes/movies');
 const { authoriz } = require('./middlewares/auth');
+const cors = require('cors');
 const signinUser = require('./routes/signin');
 const signupUser = require('./routes/signup');
 const { centralErrors } = require('./utils/centralErrors');
@@ -17,12 +18,9 @@ const NotFoundError = require('./errors/NotFoundError');
 
 const app = express();
 
+
 const { PORT = 3000, LINK, NODE_ENV } = process.env;
 
-app.use((req,res, next) => {
-  console.log(req)
-  next()
-})
 const corsOptions = {
   origin: ['*'],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
