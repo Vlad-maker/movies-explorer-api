@@ -10,7 +10,6 @@ const cors = require('cors')
 const userRouter = require('./routes/users');
 const moviesRouter = require('./routes/movies');
 const { authoriz } = require('./middlewares/auth');
-const cors = require('cors');
 const signinUser = require('./routes/signin');
 const signupUser = require('./routes/signup');
 const { centralErrors } = require('./utils/centralErrors');
